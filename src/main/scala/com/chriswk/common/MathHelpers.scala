@@ -1,5 +1,7 @@
 package com.chriswk.common
 
+import annotation.tailrec
+
 object MathHelpers {
   lazy val primes: Stream[Int] = 2 #:: Stream.from(3).filter(i => primes.takeWhile(j => j * j <= i).forall(i % _ > 0))
   def primeFactors(num: Long): List[Long] = {
@@ -17,5 +19,15 @@ object MathHelpers {
   def square(a: Int) = a * a
   def sumOfSquares(start: Int, finish: Int): BigInt = (start to finish).map(square).sum
   def squareOfSum(start: Int, finish: Int): BigInt = square((start to finish).sum)
-
+  def fac(n: Int) = {
+    @tailrec
+    def factorial(n: Int, accu: BigInt): BigInt = {
+      if(n == 0) accu
+      else {
+        factorial(n-1, n * accu)
+      }
+    }
+    factorial(n, n)
+  }
+  def sumOfNumberAsString(n: BigInt) = n.toString.view.map(_.asDigit).sum
 }
