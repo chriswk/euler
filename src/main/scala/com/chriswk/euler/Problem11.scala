@@ -1,6 +1,6 @@
 package com.chriswk.euler
 
-object Euler11 extends App {
+object Problem11 extends App {
 
   // Find the greatest product of four number in a row in whatever direction inside
   // a 20x20 matrix.

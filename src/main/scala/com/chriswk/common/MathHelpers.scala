@@ -14,4 +14,7 @@ object MathHelpers {
   def lcm(a: BigInt, b: BigInt): BigInt = a*b / gcd(a,b)
   def even(a: Int) = a % 2 == 0
   def odd(a: Int) = a % 2 == 1
+  def square(a: Int) = a * a
+  def sumOfSquares(start: Int, finish: Int): BigInt = (start to finish).map(square).sum
+  def squareOfSum(start: Int, finish: Int): BigInt = square((start to finish).sum)
 }
