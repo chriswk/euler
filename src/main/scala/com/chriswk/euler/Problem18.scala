@@ -1,3 +1,8 @@
+import com.chriswk.common.Profiling._
+
+import com.chriswk.common.GridHelper.mkGrid
+import com.chriswk.common.GridHelper.sumOfGrid
+
 object Problem18 extends App {
 
   val input = """75
@@ -16,23 +21,14 @@ object Problem18 extends App {
 63 66 04 68 89 53 67 30 73 16 69 87 40 31
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23"""
 
-  def mkGrid(input: String) = {
-    input.trim.split("\n").map(_.split("\\s+").map(_.toInt))
-  }
+
 
   val grid = mkGrid(input)
 
 
-  def f(rows: Array[Array[Int]], bottom: Seq[Int]): Int = {
-    val ms = bottom.zip(bottom.tail).map(p => p._1 max p._2)
-    val ss = rows.last.zip(ms).map(p => p._1 + p._2)
-    if (ss.size == 1) ss.head else f(rows.init, ss)
-  }
 
-  val ans = f(grid.init, grid.last)
+
+  val ans = timed(printTime("Found sum of grid in ")) { sumOfGrid(grid.init, grid.last) }
   println(ans)
 
-  val prob67 = mkGrid(scala.io.Source.fromFile("triangle.txt").mkString)
-  val ans67 = f(prob67.init, prob67.last)
-  println(ans67)
 }

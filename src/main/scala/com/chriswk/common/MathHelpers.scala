@@ -17,4 +17,5 @@ object MathHelpers {
   def square(a: Int) = a * a
   def sumOfSquares(start: Int, finish: Int): BigInt = (start to finish).map(square).sum
   def squareOfSum(start: Int, finish: Int): BigInt = square((start to finish).sum)
+
 }
