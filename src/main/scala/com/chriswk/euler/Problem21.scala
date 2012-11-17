@@ -1,6 +1,6 @@
 package com.chriswk.euler
 
-import com.chriswk.common.MathHelpers.divisors
+import com.chriswk.common.MathHelpers.sumOfDivisors
 
 /***
   * Let d(n) be defined as the sum of proper divisors of n (numbers less than n which divide evenly into n).
@@ -9,7 +9,7 @@ import com.chriswk.common.MathHelpers.divisors
   * Evaluate the sum of all the amicable numbers under 10000.*/
 
 object Problem21 extends App {
-  val ds = divisors(10000)
+  val ds = sumOfDivisors(10000)
   val pairs = ds.zipWithIndex.collect {
     case (n, i) if n < 10000 && ds(n) != n && ds(n) == i => i
   }
