@@ -1,14 +1,14 @@
 package com.chriswk.euler
 
+/***
+  * Find the greatest product of five consecutive digits in the 1000-digit number.
+  */
 object Problem8 extends App {
   def product(nums: String) = {
     nums.map(_.asDigit).product
   }
 
-  def maxConsecutiveProduct(n: Int, num: String) = {
-    val slidingProduct = num.sliding(n).map(product)
-    slidingProduct.max
-  }
+  def maxConsecutiveProduct(n: Int, num: String) = num.sliding(n).map(product).max
 
   val num = """73167176531330624919225119674426574742355349194934
 96983520312774506326239578318016984801869478851843
