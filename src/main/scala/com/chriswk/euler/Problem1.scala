@@ -19,14 +19,16 @@ object Problem1 extends App {
     }
   }
 
+  val thousand = 1000
   Profiling.timed(Profiling.printTime("With view filter method (1000,3,5)")) {
-    println(sumOfNumbers(1000, List(3, 5)))
+    println(sumOfNumbers(thousand, List(3, 5)))
   }
   Profiling.timed(Profiling.printTime("With gaussian method (1000,3,5)")) {
-    println(gaussianWay(999, List(3, 5)))
+
+    println(gaussianWay(thousand - 1, List(3, 5)))
   }
   Profiling.timed(Profiling.printTime("With gaussian method (1000000,3,5,11,13)")) {
-    val init = BigInt("10000000000000000000000000")
-    println(gaussianWay(init - 1, List(3,5,7,9)))
+    val tenZotta = BigInt("10000000000000000000000000")
+    println(gaussianWay(tenZotta - 1, List(3,5,7,9)))
   }
 }
