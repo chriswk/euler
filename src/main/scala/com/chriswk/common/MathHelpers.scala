@@ -30,4 +30,6 @@ object MathHelpers {
     factorial(n, n)
   }
   def sumOfNumberAsString(n: BigInt) = n.toString.view.map(_.asDigit).sum
+  def divisors(finish: Int) = (0 until finish).view.map(n => (1 to (n/2)).filter(n % _ == 0).sum)
+
 }
