@@ -1,9 +1,7 @@
 package com.chriswk.common
 
 object MathHelpers {
-  lazy val primes: Stream[Int] = Profiling.timed(Profiling.printTime("Calculated primes in ")) {
-    2 #:: primes.map(i => Stream.from(i + 1).find(j => primes.takeWhile(k => k * k <= j).forall(j % _ > 0)).get)
-  }
+  lazy val primes: Stream[Int] = 2 #:: Stream.from(3).filter(i => primes.takeWhile(j => j * j <= i).forall(i % _ > 0))
   lazy val fib: Stream[Int] = 0 #:: 1 #:: fib.zip(fib.tail).map(p => p._1 + p._2)
   def gcd(a: BigInt, b: BigInt): BigInt = if (b == 0) a else gcd(b, a%b)
   def lcm(a: BigInt, b: BigInt): BigInt = a*b / gcd(a,b)
