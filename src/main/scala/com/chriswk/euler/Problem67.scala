@@ -14,7 +14,7 @@ import com.chriswk.common.Profiling
   * NOTE: This is a much more difficult version of Problem 18. It is not possible to try every route to solve this problem, as there are 299 altogether! If you could check one trillion (1012) routes every second it would take over twenty billion years to check them all. There is an efficient algorithm to solve it. ;o)
   */
 object Problem67 extends App {
-  val prob67 = Profiling.timed(Profiling.printTime("Made grid from file in ")) { mkGrid(scala.io.Source.fromInputStream(getClass.getResourceAsStream("triangle.txt")).mkString) }
+  val prob67 = Profiling.timed(Profiling.printTime("Made grid from file in ")) { mkGrid(scala.io.Source.fromInputStream(getClass.getClassLoader.getResourceAsStream("triangle.txt")).mkString) }
   val ans67 = Profiling.timed(Profiling.printTime("Found sum of grid")) { sumOfGrid(prob67.init, prob67.last) }
   println(ans67)
 }
