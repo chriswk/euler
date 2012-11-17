@@ -1,0 +1,6 @@
+.idea
+.idea_modules
+project
+*.ipr
+*.iwl
+*.iml
