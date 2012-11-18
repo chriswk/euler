@@ -39,4 +39,5 @@ object MathHelpers {
     if (solutions > solutionTop) base.map(_.toLong).product * m
     else find1OverXPlus1OverYEquals1OverN(solutionTop, base, m+1)
   }
+  def sumOfPowersOfDigits(n: Int, power: Int) = n.toString.map(_.asDigit).map(math.pow(_, power).toInt).sum
 }
