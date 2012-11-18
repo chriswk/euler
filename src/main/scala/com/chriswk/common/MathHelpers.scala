@@ -31,5 +31,6 @@ object MathHelpers {
   }
   def sumOfNumberAsString(n: BigInt) = n.toString.view.map(_.asDigit).sum
   def sumOfDivisors(finish: Int) = (0 until finish).view.map(n => (1 to (n/2)).filter(n % _ == 0).sum)
-
+  def eagerSumOfDivisors(finish: Int) = (0 until finish).map(n => (1 to (n/2)).filter(n % _ == 0).sum)
+  def permutationOfString(s: String): Seq[String] = if (s.size == 1) Seq(s) else s.flatMap(c => permutationOfString(s.filterNot(_ == c)).map(c +))
 }
