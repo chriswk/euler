@@ -27,7 +27,7 @@ object MathHelpers {
         factorial(n-1, n * accu)
       }
     }
-    factorial(n, n)
+    factorial(n, 1)
   }
   def sumOfNumberAsString(n: BigInt) = n.toString.view.map(_.asDigit).sum
   def sumOfDivisors(finish: Int) = (0 until finish).view.map(n => (1 to (n/2)).filter(n % _ == 0).sum)
