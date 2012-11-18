@@ -3,7 +3,7 @@ import annotation.tailrec
 
 object MathHelpers {
   lazy val primes: Stream[Int] = 2 #:: Stream.from(3).filter(i => primes.takeWhile(j => j * j <= i).forall(i % _ > 0))
-  def isPrime(n: Int) = primeFactors(n).size == 1
+  def isPrime(n: Int) = primeFactors(n).size == 1 && primeFactors(n)(0) != 1
   def primeFactors(num: Long): List[Long] = {
     val exists = (2L to math.sqrt(num).toLong).find(num % _ == 0)
     exists match {
