@@ -46,4 +46,8 @@ object MathHelpers {
     val mod = math.pow(10, digits(value)-turns).intValue()
     (value % mod) * math.pow(10, turns).intValue() + (value/mod)
   }
+
+  def isPalindromic(n: Int, base: Int): Boolean = Integer.toString(n, base) == Integer.toString(n, base).reverse
+
+
 }
