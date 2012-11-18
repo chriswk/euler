@@ -3,7 +3,7 @@ import annotation.tailrec
 
 object MathHelpers {
   lazy val primes: Stream[Int] = 2 #:: Stream.from(3).filter(i => primes.takeWhile(j => j * j <= i).forall(i % _ > 0))
-  def isPrime(n: Int) = odd(n) && primes.view.takeWhile(_ <= n).contains(n)
+  def isPrime(n: Int) = primeFactors(n).size == 1
   def primeFactors(num: Long): List[Long] = {
     val exists = (2L to math.sqrt(num).toLong).find(num % _ == 0)
     exists match {
@@ -40,4 +40,10 @@ object MathHelpers {
     else find1OverXPlus1OverYEquals1OverN(solutionTop, base, m+1)
   }
   def sumOfPowersOfDigits(n: Int, power: Int) = n.toString.map(_.asDigit).map(math.pow(_, power).toInt).sum
+
+  def digits(value: Int): Int = if (value == 0) 0 else 1 + digits(value/10)
+  def rotate(value: Int, turns: Int) = {
+    val mod = math.pow(10, digits(value)-turns).intValue()
+    (value % mod) * math.pow(10, turns).intValue() + (value/mod)
+  }
 }
