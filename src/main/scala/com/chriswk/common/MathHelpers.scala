@@ -1,6 +1,4 @@
 package com.chriswk.common
-import com.chriswk.common.Profiling.timed
-import com.chriswk.common.Profiling.printTime
 import annotation.tailrec
 
 object MathHelpers {
@@ -35,4 +33,10 @@ object MathHelpers {
   def sumOfDivisors(finish: Int) = (0 until finish).view.map(n => (1 to (n/2)).filter(n % _ == 0).sum)
   def eagerSumOfDivisors(finish: Int) = (0 until finish).map(n => (1 to (n/2)).filter(n % _ == 0).sum)
   def permutationOfString(s: String): Seq[String] = if (s.size == 1) Seq(s) else s.flatMap(c => permutationOfString(s.filterNot(_ == c)).map(c +))
+  def find1OverXPlus1OverYEquals1OverN(solutionTop: Int, base: Seq[Int], m: Int): Long = {
+    val s = base ++ primeFactors(m)
+    val solutions = (s ++ s).groupBy(x => x).map(_._2.size).map(_+1).product/2+1
+    if (solutions > solutionTop) base.map(_.toLong).product * m
+    else find1OverXPlus1OverYEquals1OverN(solutionTop, base, m+1)
+  }
 }
