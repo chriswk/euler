@@ -31,8 +31,8 @@ object Problem1 extends App {
 
     println(gaussianWay(thousand - 1, List(3, 5)))
   }
-  timed(printTime("With gaussian method (10000000000000000000000000,3,5,7,9)")) {
+  timed(printTime("With gaussian method (10000000000000000000000000,3,5,7,11)")) {
     val tenZotta = BigInt("10000000000000000000000000")
-    println(gaussianWay(tenZotta - 1, List(3,5,7,9)))
+    println(gaussianWay(tenZotta - 1, List(3,5,7,11)))
   }
 }
