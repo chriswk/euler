@@ -1,3 +1,5 @@
+package com.chriswk.euler
+
 import com.chriswk.common.Profiling._
 
 import com.chriswk.common.GridHelper.mkGrid
@@ -21,14 +23,11 @@ object Problem18 extends App {
 63 66 04 68 89 53 67 30 73 16 69 87 40 31
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23"""
 
-
-
   val grid = mkGrid(input)
 
-
-
-
-  val ans = timed(printTime("Found sum of grid in ")) { sumOfGrid(grid.init, grid.last) }
+  val ans = timed(printTime("Found sum of grid in ")) {
+    sumOfGrid(grid.init, grid.last)
+  }
   println(ans)
 
 }

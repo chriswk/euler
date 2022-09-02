@@ -28,54 +28,61 @@ object Problem11 extends App {
 """
   def str2Matrix(s: String) = {
     val ls = io.Source.fromString(s).getLines
-    val ia = for (l <- ls; if l.length>0) yield l.split(" ").map(_.toInt)
+    val ia = for (l <- ls; if l.length > 0) yield l.split(" ").map(_.toInt)
     ia.toArray
   }
 
-  lazy val matrix  = str2Matrix(ex11Grid)
+  lazy val matrix = str2Matrix(ex11Grid)
 
-  /**
-   * takes a Tuple2[Int, Int] (or (Int, Int) or a position for the rest of this code)
-   * and returns the corresponding value in the matrix.
-   */
+  /** takes a Tuple2[Int, Int] (or (Int, Int) or a position for the rest of this
+    * code) and returns the corresponding value in the matrix.
+    */
   def m(p: (Int, Int)) = matrix(p._1)(p._2)
 
   // pimp (Int, Int) with Point methods.
-  implicit def pairIntInt2Point(p: (Int, Int)) = Point(p)
+  implicit def pairIntInt2Point(p: (Int, Int)): Point = Point(p)
 
   case class Point(p: (Int, Int)) {
 
-    /** apply a vector v to a point returning the new position.*/
+    /** apply a vector v to a point returning the new position. */
     def +(v: (Int, Int)) = (p._1 + v._1, p._2 + v._2)
 
-    /** collect in a List the passed point p plus the resulting points applying vector v n times.*/
+    /** collect in a List the passed point p plus the resulting points applying
+      * vector v n times.
+      */
     private def collect(p: (Int, Int), v: (Int, Int), n: Int) = {
 
       @scala.annotation.tailrec
-      def _collect(l: List[(Int, Int)], v: (Int, Int), n: Int): List[(Int, Int)] =
+      def _collect(
+          l: List[(Int, Int)],
+          v: (Int, Int),
+          n: Int
+      ): List[(Int, Int)] =
         if (n == 0) l else _collect((l.head + v) :: l, v, n - 1)
 
       _collect(p :: Nil, v, n)
     }
 
-    /** collect p and the three adjacent points vertically (downward).*/
+    /** collect p and the three adjacent points vertically (downward). */
     def | = collect(p, (1, 0), 3)
 
-    /** collect p and the three adjacent points diagonally (downward).*/
+    /** collect p and the three adjacent points diagonally (downward). */
     def \ = collect(p, (1, 1), 3)
 
-    /** collect p and the three adjacent points antidiagonally (http://goo.gl/Oi1Q1)(downward).*/
+    /** collect p and the three adjacent points antidiagonally
+      * (http://goo.gl/Oi1Q1)(downward).
+      */
     def / = collect(p, (1, -1), 3)
 
-    /** collect p and the three adjacent points horizontally (rightward).*/
+    /** collect p and the three adjacent points horizontally (rightward). */
     def - = collect(p, (0, 1), 3)
   }
 
-  /**
-   * collect all the relevant radial segments of positions starting from p.
-   * This function is meant to be used on positions of a 20x20 matrix, ie (0, 0) to (19, 19).
-   * If you pass all possible positions, you will have covered the complete matrix.
-   */
+  /** collect all the relevant radial segments of positions starting from p.
+    * This function is meant to be used on positions of a 20x20 matrix, ie (0,
+    * 0) to (19, 19). If you pass all possible positions, you will have covered
+    * the complete matrix.
+    */
   def segments(p: (Int, Int)) = p match {
     case (i, j) if i > 16 && j > 16 => Nil
     case (i, _) if i > 16           => p.- :: Nil
@@ -84,10 +91,9 @@ object Problem11 extends App {
     case _                          => p./ :: p.| :: p.\ :: p.- :: Nil
   }
 
-
-  override def main(args: Array[String]): Unit = {
-    val allPos = for (i <- 0 to 19; j <- 0 to 19) yield (i, j)
-    val sol = allPos flatMap segments map { _.foldLeft(1) { (a, b) => a * m(b) } } reduceLeft math.max
-    println("The solution for Euler 11 problem is " + sol)
-  }
+  val allPos = for (i <- 0 to 19; j <- 0 to 19) yield (i, j)
+  val sol = allPos flatMap segments map {
+    _.foldLeft(1) { (a, b) => a * m(b) }
+  } reduceLeft math.max
+  println("The solution for Euler 11 problem is " + sol)
 }

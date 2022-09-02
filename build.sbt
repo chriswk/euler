@@ -1,3 +1,3 @@
 name := "Euler"
 
-scalaVersion := "2.9.2"
+scalaVersion := "3.1.3"
